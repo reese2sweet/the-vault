@@ -11,47 +11,41 @@
 <style>
 /* ===== ELEANOR HERO (homepage only) ===== */
 .vault-hero{position:relative;height:100vh;min-height:560px;overflow:hidden;cursor:pointer;
-  background:radial-gradient(120% 80% at 50% -10%,#1a1712 0%,#0c0b09 45%,#050505 100%);}
+background:radial-gradient(120% 80% at 50% -10%,#1a1712 0%,#0c0b09 45%,#050505 100%);}
 .vault-hero .vh-ambient{position:absolute;inset:0;pointer-events:none;z-index:1;mix-blend-mode:screen;
-  background:radial-gradient(60% 50% at 18% 80%,rgba(201,162,39,.10),transparent 70%),
-             radial-gradient(45% 40% at 85% 22%,rgba(140,70,20,.10),transparent 70%);}
+background:radial-gradient(60% 50% at 18% 80%,rgba(201,162,39,.10),transparent 70%),
+radial-gradient(45% 40% at 85% 22%,rgba(140,70,20,.10),transparent 70%);}
 .vault-hero .vh-floor{position:absolute;left:0;right:0;bottom:0;height:40%;z-index:2;pointer-events:none;
-  background:linear-gradient(to bottom,transparent,rgba(0,0,0,.6));border-top:1px solid rgba(201,162,39,.06);}
-.vault-hero .vh-smoke{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.5;}
-.vault-hero .vh-smoke span{position:absolute;bottom:-140px;width:340px;height:340px;border-radius:50%;
-  background:radial-gradient(circle,rgba(180,160,120,.13),transparent 65%);filter:blur(18px);
-  animation:vhrise linear infinite;}
-.vault-hero .vh-smoke span:nth-child(1){left:8%;animation-duration:26s;}
-.vault-hero .vh-smoke span:nth-child(2){left:55%;animation-duration:34s;animation-delay:-12s;transform:scale(1.4);}
-.vault-hero .vh-smoke span:nth-child(3){left:80%;animation-duration:30s;animation-delay:-6s;transform:scale(.9);}
-@keyframes vhrise{0%{transform:translateY(0) scale(.8);opacity:0;}20%{opacity:.55;}100%{transform:translateY(-90vh) scale(1.7);opacity:0;}}
+background:linear-gradient(to bottom,transparent,rgba(0,0,0,.6));border-top:1px solid rgba(201,162,39,.06);}
+/* Canvas smoke — replaces old .vh-smoke spans */
+#vhSmokeCanvas{position:absolute;inset:0;z-index:3;pointer-events:none;width:100%;height:100%;}
 .vault-hero .vh-lane{position:absolute;top:18vh;left:0;width:100%;height:220px;z-index:4;pointer-events:none;}
 .vault-hero .vh-car{position:absolute;top:0;left:0;width:min(46vw,560px);height:auto;
-  transform:translateX(-60vw);will-change:transform;filter:drop-shadow(0 26px 26px rgba(0,0,0,.7));
-  animation:vhdrive 9s cubic-bezier(.45,0,.55,1) infinite;}
+transform:translateX(-60vw);will-change:transform;filter:drop-shadow(0 26px 26px rgba(0,0,0,.7));
+animation:vhdrive 9s cubic-bezier(.45,0,.55,1) infinite;}
 @keyframes vhdrive{0%{transform:translateX(-60vw);}50%{transform:translateX(118vw);}50.01%{transform:translateX(-60vw);}100%{transform:translateX(118vw);}}
 .vault-hero .vh-inner{position:absolute;top:0;left:0;right:0;bottom:0;z-index:6;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;padding:0 24px;pointer-events:none;}
+align-items:center;justify-content:center;text-align:center;padding:0 24px;pointer-events:none;}
 .vault-hero .vh-eyebrow{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.55em;text-indent:.55em;
-  color:#c9a227;margin-bottom:22px;text-transform:uppercase;}
+color:#c9a227;margin-bottom:22px;text-transform:uppercase;}
 .vault-hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;color:#f3eee2;line-height:1.02;
-  font-size:clamp(46px,9vw,104px);text-shadow:0 2px 34px rgba(0,0,0,.85);margin:0;}
+font-size:clamp(46px,9vw,104px);text-shadow:0 2px 34px rgba(0,0,0,.85);margin:0;}
 .vault-hero .vh-sub{font-family:'Inter',sans-serif;font-weight:300;color:#b7b0a4;max-width:620px;margin:24px auto 0;
-  font-size:clamp(14px,1.7vw,18px);line-height:1.6;}
+font-size:clamp(14px,1.7vw,18px);line-height:1.6;}
 .vault-hero .vh-iykyk{font-family:'Cormorant Garamond',serif;font-style:italic;color:#8f887d;margin-top:18px;
-  font-size:clamp(15px,1.9vw,20px);}
+font-size:clamp(15px,1.9vw,20px);}
 .vault-hero .vh-cta{pointer-events:auto;margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
 .vh-btn{font-family:'Inter',sans-serif;letter-spacing:.34em;text-indent:.34em;font-size:12px;text-transform:uppercase;
-  padding:15px 32px;border:1px solid #c9a227;color:#e6c66b;background:rgba(0,0,0,.35);cursor:pointer;
-  text-decoration:none;transition:.4s;backdrop-filter:blur(2px);}
+padding:15px 32px;border:1px solid #c9a227;color:#e6c66b;background:rgba(0,0,0,.35);cursor:pointer;
+text-decoration:none;transition:.4s;backdrop-filter:blur(2px);}
 .vh-btn:hover{background:#c9a227;color:#0c0b09;box-shadow:0 0 40px rgba(201,162,39,.4);}
 .vh-btn.solid{background:transparent;}
 #vhStart.hide{opacity:0;pointer-events:none;}
 .vault-hero .vh-vig{position:absolute;inset:0;z-index:5;pointer-events:none;
-  box-shadow:inset 0 0 240px 60px rgba(0,0,0,.9);
-  background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.5) 100%);}
+box-shadow:inset 0 0 240px 60px rgba(0,0,0,.9);
+background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.5) 100%);}
 .vault-hero .vh-rpm{position:absolute;right:22px;bottom:20px;z-index:7;font-family:'Inter',sans-serif;
-  font-size:10px;letter-spacing:.3em;color:#6e675b;}
+font-size:10px;letter-spacing:.3em;color:#6e675b;}
 </style>
 </head>
 <body>
@@ -71,9 +65,9 @@
 <header class="vault-hero" id="vaultHero">
 <div class="vh-ambient"></div>
 <div class="vh-floor"></div>
-<div class="vh-smoke"><span></span><span></span><span></span></div>
+<canvas id="vhSmokeCanvas"></canvas>
 <div class="vh-lane">
-<svg class="vh-car" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+<svg class="vh-car" id="vhCar" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <linearGradient id="vhbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d9197"/><stop offset="0.45" stop-color="#5d6167"/><stop offset="1" stop-color="#34373c"/></linearGradient>
 <linearGradient id="vhglass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26313a"/><stop offset="1" stop-color="#0c1015"/></linearGradient>
@@ -134,7 +128,7 @@
 <h2>The Grey Ghost</h2>
 </div>
 <div class="feature reveal">
-<div class="feature-img"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1100&q=80" alt="Classic American muscle car in gunmetal grey"></div>
+<div class="feature-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Shelby_Mustang_GT500_%22Eleanor%22_1967.jpeg/1100px-Shelby_Mustang_GT500_%22Eleanor%22_1967.jpeg" alt="1967 Shelby Mustang GT500 Eleanor — gunmetal grey fastback"></div>
 <div class="feature-text">
 <div class="eyebrow">1967 &middot; Fastback</div>
 <h3>The car that started the legend.</h3>
@@ -155,15 +149,15 @@
 </div>
 <div class="grid">
 <a class="card reveal" href="cars/gt500.html">
-<div class="card-img"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80" alt="Ford Shelby GT500"></div>
+<div class="card-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Shelby_Mustang_GT500_%22Eleanor%22_1967.jpeg/900px-Shelby_Mustang_GT500_%22Eleanor%22_1967.jpeg" alt="1967 Ford Shelby GT500 Eleanor"></div>
 <div class="card-body"><div class="make">Ford</div><h3>Shelby GT500</h3><div class="spec">1967 &middot; 428 Police Interceptor V8</div><span class="view">View Profile &rarr;</span></div>
 </a>
 <a class="card reveal" href="cars/z28.html">
-<div class="card-img"><img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=900&q=80" alt="Chevrolet Camaro Z/28"></div>
+<div class="card-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/%2769_Chevrolet_Camaro_Coupe_Z28_%28Centropolis_Laval_%2710%29.jpg/900px-%2769_Chevrolet_Camaro_Coupe_Z28_%28Centropolis_Laval_%2710%29.jpg" alt="1969 Chevrolet Camaro Z/28"></div>
 <div class="card-body"><div class="make">Chevrolet</div><h3>Camaro Z/28</h3><div class="spec">1969 &middot; 302 cu in V8</div><span class="view">View Profile &rarr;</span></div>
 </a>
 <a class="card reveal" href="cars/charger.html">
-<div class="card-img"><img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80" alt="Dodge Charger R/T"></div>
+<div class="card-img"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/1969_Dodge_Charger_R-T_%2815535239863%29.jpg/900px-1969_Dodge_Charger_R-T_%2815535239863%29.jpg" alt="1969 Dodge Charger R/T"></div>
 <div class="card-body"><div class="make">Dodge</div><h3>Charger R/T</h3><div class="spec">1969 &middot; 440 Magnum V8</div><span class="view">View Profile &rarr;</span></div>
 </a>
 </div>
@@ -172,7 +166,7 @@
 </section>
 
 <section class="cta">
-<img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=1600&q=80" alt="Muscle car at dusk">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/1970_Chevrolet_Chevelle_SS_%2821443537054%29.jpg/1600px-1970_Chevrolet_Chevelle_SS_%2821443537054%29.jpg" alt="1970 Chevelle SS — muscle car at dusk">
 <div class="wrap">
 <h2>Some doors only open once.</h2>
 <p>Membership is not purchased. It is recognised.</p>
@@ -199,68 +193,148 @@
 <button class="ambient" title="Play ambient idle" onclick="window.__toggleAmbient(this)">&#9834;</button>
 
 <script>
+/* ===== Realistic Canvas Exhaust Smoke — tied to car animation ===== */
+(function(){
+var canvas=document.getElementById('vhSmokeCanvas');
+var ctx2=canvas.getContext('2d');
+var particles=[];
+var raf;
+var hero=document.getElementById('vaultHero');
+var carEl=document.getElementById('vhCar');
+
+function resize(){canvas.width=hero.offsetWidth;canvas.height=hero.offsetHeight;}
+resize();
+window.addEventListener('resize',resize);
+
+// Parse car position from computed transform translateX
+function getCarTailX(){
+var st=window.getComputedStyle(carEl);
+var mat=new DOMMatrix(st.transform);
+var carW=carEl.offsetWidth;
+return mat.m41 + 22; // leftmost edge (tail pipe approx at left 4% of car)
+}
+function getCarY(){
+var lane=carEl.closest('.vh-lane');
+if(!lane) return hero.offsetHeight*0.18+140;
+return lane.offsetTop + carEl.offsetHeight*0.82;
+}
+
+// Particle factory
+function spawnSmoke(x,y){
+// Several puffs per frame for density
+for(var i=0;i<3;i++){
+particles.push({
+x:x + (Math.random()-0.5)*12,
+y:y + (Math.random()-0.5)*8,
+vx:(Math.random()-0.8)*0.6, // mostly drift leftward (behind car)
+vy:-(Math.random()*0.9+0.2), // rise upward
+r:Math.random()*22+18, // radius
+alpha:Math.random()*0.22+0.08,
+grow:Math.random()*0.35+0.15,
+life:0,
+maxLife:Math.random()*110+80
+});
+}
+}
+
+function drawSmoke(){
+ctx2.clearRect(0,0,canvas.width,canvas.height);
+for(var i=particles.length-1;i>=0;i--){
+var p=particles[i];
+p.x+=p.vx;
+p.y+=p.vy;
+p.r+=p.grow;
+p.life++;
+var progress=p.life/p.maxLife;
+var alpha=p.alpha*(1-progress);
+if(alpha<=0.002||p.life>p.maxLife){particles.splice(i,1);continue;}
+var grad=ctx2.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+grad.addColorStop(0,'rgba(210,195,170,'+alpha.toFixed(3)+')');
+grad.addColorStop(0.5,'rgba(160,148,130,'+(alpha*0.55).toFixed(3)+')');
+grad.addColorStop(1,'rgba(80,75,65,0)');
+ctx2.beginPath();
+ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx2.fillStyle=grad;
+ctx2.fill();
+}
+}
+
+var lastSpawn=0;
+function loop(ts){
+raf=requestAnimationFrame(loop);
+// Spawn only when car is visible on screen (not in the gap between loops)
+var tailX=getCarTailX();
+if(tailX>0 && tailX<canvas.width+100 && ts-lastSpawn>16){
+spawnSmoke(tailX, getCarY());
+lastSpawn=ts;
+}
+drawSmoke();
+}
+raf=requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
 /* ===== Synthesized beefy V8 — 10 second clip, autoplay-safe ===== */
 (function(){
-  var started=false, ctx, master, nodes=[], rpmEl=document.getElementById('vhRpm'),
-      startBtn=document.getElementById('vhStart'), hero=document.getElementById('vaultHero');
-  function noiseBuf(c){var n=c.sampleRate*2,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);
-    for(var i=0;i<n;i++)d[i]=Math.random()*2-1;return b;}
-  function startEngine(){
-    if(started) return; started=true;
-    try{ ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){return;}
-    master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
-    var base=ctx.createOscillator(); base.type='sawtooth'; base.frequency.value=42;
-    var sub=ctx.createOscillator(); sub.type='square'; sub.frequency.value=21;
-    var lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=320; lp.Q.value=8;
-    var noise=ctx.createBufferSource(); noise.buffer=noiseBuf(ctx); noise.loop=true;
-    var np=ctx.createBiquadFilter(); np.type='bandpass'; np.frequency.value=160; np.Q.value=1.4;
-    var ng=ctx.createGain(); ng.gain.value=0.35;
-    var drive=ctx.createWaveShaper(); var cv=new Float32Array(256);
-    for(var i=0;i<256;i++){var x=i/128-1; cv[i]=Math.tanh(x*2.2);} drive.curve=cv;
-    var lfo=ctx.createOscillator(); lfo.type='sine'; lfo.frequency.value=7.5;
-    var lfoG=ctx.createGain(); lfoG.gain.value=0.10;
-    base.connect(lp); sub.connect(lp); lp.connect(drive); drive.connect(master);
-    noise.connect(np); np.connect(ng); ng.connect(master);
-    lfo.connect(lfoG); lfoG.connect(master.gain);
-    base.start(); sub.start(); noise.start(); lfo.start();
-    nodes=[base,sub,noise,lfo];
-    var t0=ctx.currentTime;
-    master.gain.setValueAtTime(0,t0);
-    master.gain.linearRampToValueAtTime(0.22,t0+0.6);
-    rpmEl.textContent='IDLE · 850 RPM';
-    startBtn.classList.add('hide');
-    // two throttle blips inside the 10s window
-    function blip(at,label){
-      var t=t0+at, peak=440, low=42;
-      base.frequency.setValueAtTime(42,t);
-      base.frequency.linearRampToValueAtTime(peak,t+0.45);
-      base.frequency.linearRampToValueAtTime(low,t+1.6);
-      sub.frequency.setValueAtTime(21,t);
-      sub.frequency.linearRampToValueAtTime(peak/2,t+0.45);
-      sub.frequency.linearRampToValueAtTime(low/2,t+1.6);
-      lp.frequency.setValueAtTime(320,t);
-      lp.frequency.linearRampToValueAtTime(2600,t+0.45);
-      lp.frequency.linearRampToValueAtTime(320,t+1.6);
-      master.gain.setValueAtTime(0.22,t);
-      master.gain.linearRampToValueAtTime(0.42,t+0.4);
-      master.gain.linearRampToValueAtTime(0.22,t+1.6);
-      setTimeout(function(){ if(started) rpmEl.textContent='REV · '+label; },at*1000);
-      setTimeout(function(){ if(started) rpmEl.textContent='IDLE · 850 RPM'; },(at+1.7)*1000);
-    }
-    blip(1.6,'6800 RPM');
-    blip(5.2,'7200 RPM');
-    // fade out and stop at 10s
-    master.gain.setValueAtTime(0.22,t0+9.2);
-    master.gain.linearRampToValueAtTime(0,t0+10);
-    setTimeout(stopEngine,10200);
-  }
-  function stopEngine(){
-    if(!started) return;
-    try{ nodes.forEach(function(n){ try{n.stop();}catch(e){} }); ctx.close(); }catch(e){}
-    started=false; rpmEl.textContent='Engine Off'; startBtn.classList.remove('hide');
-  }
-  startBtn.addEventListener('click',function(e){ e.stopPropagation(); started?null:startEngine(); });
-  hero.addEventListener('click',function(){ if(!started) startEngine(); });
+var started=false, ctx, master, nodes=[], rpmEl=document.getElementById('vhRpm'),
+startBtn=document.getElementById('vhStart'), hero=document.getElementById('vaultHero');
+function noiseBuf(c){var n=c.sampleRate*2,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);
+for(var i=0;i<n;i++)d[i]=Math.random()*2-1;return b;}
+function startEngine(){
+if(started) return; started=true;
+try{ ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){return;}
+master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
+var base=ctx.createOscillator(); base.type='sawtooth'; base.frequency.value=42;
+var sub=ctx.createOscillator(); sub.type='square'; sub.frequency.value=21;
+var lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=320; lp.Q.value=8;
+var noise=ctx.createBufferSource(); noise.buffer=noiseBuf(ctx); noise.loop=true;
+var np=ctx.createBiquadFilter(); np.type='bandpass'; np.frequency.value=160; np.Q.value=1.4;
+var ng=ctx.createGain(); ng.gain.value=0.35;
+var drive=ctx.createWaveShaper(); var cv=new Float32Array(256);
+for(var i=0;i<256;i++){var x=i/128-1; cv[i]=Math.tanh(x*2.2);} drive.curve=cv;
+var lfo=ctx.createOscillator(); lfo.type='sine'; lfo.frequency.value=7.5;
+var lfoG=ctx.createGain(); lfoG.gain.value=0.10;
+base.connect(lp); sub.connect(lp); lp.connect(drive); drive.connect(master);
+noise.connect(np); np.connect(ng); ng.connect(master);
+lfo.connect(lfoG); lfoG.connect(master.gain);
+base.start(); sub.start(); noise.start(); lfo.start();
+nodes=[base,sub,noise,lfo];
+var t0=ctx.currentTime;
+master.gain.setValueAtTime(0,t0);
+master.gain.linearRampToValueAtTime(0.22,t0+0.6);
+rpmEl.textContent='IDLE · 850 RPM';
+startBtn.classList.add('hide');
+function blip(at,label){
+var t=t0+at, peak=440, low=42;
+base.frequency.setValueAtTime(42,t);
+base.frequency.linearRampToValueAtTime(peak,t+0.45);
+base.frequency.linearRampToValueAtTime(low,t+1.6);
+sub.frequency.setValueAtTime(21,t);
+sub.frequency.linearRampToValueAtTime(peak/2,t+0.45);
+sub.frequency.linearRampToValueAtTime(low/2,t+1.6);
+lp.frequency.setValueAtTime(320,t);
+lp.frequency.linearRampToValueAtTime(2600,t+0.45);
+lp.frequency.linearRampToValueAtTime(320,t+1.6);
+master.gain.setValueAtTime(0.22,t);
+master.gain.linearRampToValueAtTime(0.42,t+0.4);
+master.gain.linearRampToValueAtTime(0.22,t+1.6);
+setTimeout(function(){ if(started) rpmEl.textContent='REV · '+label; },at*1000);
+setTimeout(function(){ if(started) rpmEl.textContent='IDLE · 850 RPM'; },(at+1.7)*1000);
+}
+blip(1.6,'6800 RPM');
+blip(5.2,'7200 RPM');
+master.gain.setValueAtTime(0.22,t0+9.2);
+master.gain.linearRampToValueAtTime(0,t0+10);
+setTimeout(stopEngine,10200);
+}
+function stopEngine(){
+if(!started) return;
+try{ nodes.forEach(function(n){ try{n.stop();}catch(e){} }); ctx.close(); }catch(e){}
+started=false; rpmEl.textContent='Engine Off'; startBtn.classList.remove('hide');
+}
+startBtn.addEventListener('click',function(e){ e.stopPropagation(); started?null:startEngine(); });
+hero.addEventListener('click',function(){ if(!started) startEngine(); });
 })();
 </script>
 <script src="js/main.js"></script>
